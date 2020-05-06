@@ -2,6 +2,7 @@ import React from 'react'
 import {useFormik} from 'formik'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import * as Yup from 'yup'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,14 @@ const initialValues = {
 const onSubmit = values => {
     console.log('Form data', values)
 }
+
+const validationSchema = Yup.object(
+    {
+        name: Yup.string().required('Required !!!'),
+        email: Yup.string().email('Invalid email format !!!').required('Required !!!'),
+        channel: Yup.string().required('Required !!!'),
+    }
+)
 
 const validate = values => {
     const error = {}
@@ -54,7 +63,8 @@ function YoutubeForm() {
     const formik = useFormik({
         initialValues,
         onSubmit,
-        validate
+        validationSchema
+        // validate
     })
 
      console.log('Visited fields',formik.touched)
