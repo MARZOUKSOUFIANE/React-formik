@@ -1,5 +1,5 @@
 import React from 'react'
-import {useFormik,Formik,Form,Field} from 'formik'
+import {useFormik,Formik,Form,Field,ErrorMessage} from 'formik'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup'
@@ -42,8 +42,6 @@ const validationSchema = Yup.object(
 function YoutubeForm() {
     const classes = useStyles();
 
-     console.log('Visited fields',formik.touched)
-
     return (
     <Formik
     initialValues={initialValues}
@@ -54,29 +52,20 @@ function YoutubeForm() {
            <Form>
                <div className='form-control'>
                 <label htmlFor='name' >Name</label>
-                <Field  
-                type='text' 
-                id='name' 
-                name='name' />
-                {formik.touched.name && formik.errors.name?  <div className='error'> {formik.errors.name} </div> : null}
+                <Field  type='text' id='name' name='name' />
+                <ErrorMessage name="name" />
                 </div>
 
                 <div className='form-control'>
                 <label htmlFor='email' >E-Mail</label>
-                <Field  
-                type='email' 
-                id='email' 
-                name='email'/>
-                {formik.touched.email && formik.errors.email?  <div className='error'> {formik.errors.email} </div> : null}
+                <Field  type='email' id='email' name='email'/>
+                <ErrorMessage name="email" />
                 </div>
 
                 <div className='form-control'>
                 <label htmlFor='channel' >Channel</label>
-                <Field  
-                type='text' 
-                id='channel' 
-                name='channel' />
-                {formik.touched.channel && formik.errors.channel?  <div className='error'> {formik.errors.channel} </div> : null}
+                <Field  type='text' id='channel' name='channel' />
+                <ErrorMessage name="channel" />
                 </div>
 
                 <button type='submit'>Sumbit</button>
