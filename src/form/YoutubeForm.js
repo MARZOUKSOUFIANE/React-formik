@@ -1,5 +1,5 @@
 import React from 'react'
-import {useFormik,Formik} from 'formik'
+import {useFormik,Formik,Form} from 'formik'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup'
@@ -48,11 +48,10 @@ function YoutubeForm() {
     <Formik
     initialValues={initialValues}
     onSubmit={onSubmit}
-    validationSchema={validationSchema}
-    >
+    validationSchema={validationSchema}>
         <div className={classes.root}>
            <Paper  className={classes.form} elevation={3}>
-           <form onSubmit={formik.handleSubmit} >
+           <Form>
                <div className='form-control'>
                 <label htmlFor='name' >Name</label>
                 <input  type='text' id='name' name='name' 
@@ -78,7 +77,7 @@ function YoutubeForm() {
                 </div>
 
                 <button type='submit'>Sumbit</button>
-            </form>
+            </Form>
            </Paper>
         </div>
      </Formik>
