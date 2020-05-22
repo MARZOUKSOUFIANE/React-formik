@@ -1,5 +1,5 @@
 import React from 'react'
-import {useFormik} from 'formik'
+import {useFormik,Formik} from 'formik'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup'
@@ -42,16 +42,14 @@ const validationSchema = Yup.object(
 function YoutubeForm() {
     const classes = useStyles();
 
-    const formik = useFormik({
-        initialValues,
-        onSubmit,
-        validationSchema
-        // validate
-    })
-
      console.log('Visited fields',formik.touched)
 
     return (
+    <Formik
+    initialValues={initialValues}
+    onSubmit={onSubmit}
+    validationSchema={validationSchema}
+    >
         <div className={classes.root}>
            <Paper  className={classes.form} elevation={3}>
            <form onSubmit={formik.handleSubmit} >
@@ -83,6 +81,7 @@ function YoutubeForm() {
             </form>
            </Paper>
         </div>
+     </Formik>
     )
 }
 
