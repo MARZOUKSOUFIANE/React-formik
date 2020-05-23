@@ -22,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
 const initialValues = {
     name: '',
     email: '',
-    channel: ''
+    channel: '',
+    comments: '',
+    address: ''
 }
 
 const onSubmit = values => {
@@ -34,6 +36,8 @@ const validationSchema = Yup.object(
         name: Yup.string().required('Required !!!'),
         email: Yup.string().email('Invalid email format !!!').required('Required !!!'),
         channel: Yup.string().required('Required !!!'),
+        comments: Yup.string().required('Required !!!'),
+        address: Yup.string().required('Required !!!'),
     }
 )
 
@@ -66,6 +70,29 @@ function YoutubeForm() {
                 <label htmlFor='channel' >Channel</label>
                 <Field  type='text' id='channel' name='channel' />
                 <ErrorMessage name="channel" />
+                </div>
+
+                <div className='form-control'>
+                <label htmlFor='channel' >Comments</label>
+                <Field  as='textarea' type='text' id='comments' name='comments' />
+                <ErrorMessage name="comments" />
+                </div>
+
+                <div className='form-control'>
+                <label htmlFor='address' >Address</label>
+                <Field name='address'>
+                    {
+                        (props) => {
+                            const {field,form,meta} = props
+                            return (
+                                <div>
+                                    <input type='text' id='address' {...field}/>
+                                    { meta.touched && meta.error ? <div>{meta.error}</div> : null }
+                                </div>
+                            )
+                        }
+                    }
+                </Field>
                 </div>
 
                 <button type='submit'>Sumbit</button>
