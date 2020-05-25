@@ -29,7 +29,8 @@ const initialValues = {
     social:  {
         facebook: '',
         twitter: ''
-    }
+    },
+    phoneNumbers: ['','']
 }
 
 const onSubmit = values => {
@@ -43,7 +44,10 @@ const validationSchema = Yup.object(
         channel: Yup.string().required('Required !!!'),
         comments: Yup.string().required('Required !!!'),
         address: Yup.string().required('Required !!!'),
-        social: Yup.string().required('Required !!!')
+        social: Yup.object().shape({
+            facebook: Yup.string().required('Required !!!'),
+            twitter: Yup.string().required('Required !!!')
+        })
     }
 )
 
@@ -91,7 +95,7 @@ function YoutubeForm() {
                         (props) => {
                             const {field,form,meta} = props
                             return (
-                                <div>
+                                <div  className='error'>
                                     <input type='text' id='address' {...field}/>
                                     { meta.touched && meta.error ? <div>{meta.error}</div> : null }
                                 </div>
@@ -104,13 +108,25 @@ function YoutubeForm() {
                 <div className='form-control'>
                 <label htmlFor='facebook' >Facebook profile</label>
                 <Field  type='text' id='facebook' name='social.facebook' />
-                <ErrorMessage name="facebook" component={TextError}/>
+                <ErrorMessage name="social.facebook" component={TextError}/>
                 </div>
 
                 <div className='form-control'>
                 <label htmlFor='twitter' >Twitter profile</label>
                 <Field  type='text' id='twitter' name='social.twitter' />
-                <ErrorMessage name="twitter" component={TextError}/>
+                <ErrorMessage name="social.twitter" component={TextError}/>
+                </div>
+
+                <div className='form-control'>
+                <label htmlFor='phone1' >Primary phoneNumber</label>
+                <Field  type='text' id='phone1' name='phoneNumbers[0]'/>
+                <ErrorMessage name="phoneNumbers[0]" component={TextError}/>
+                </div>
+
+                <div className='form-control'>
+                <label htmlFor='phone2' >Secondary phoneNumber</label>
+                <Field  type='text' id='phone2' name='phoneNumbers[1]' />
+                <ErrorMessage name="phoneNumbers[1]" component={TextError}/>
                 </div>
 
 
