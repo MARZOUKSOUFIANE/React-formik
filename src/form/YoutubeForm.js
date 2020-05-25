@@ -25,7 +25,11 @@ const initialValues = {
     email: '',
     channel: '',
     comments: '',
-    address: ''
+    address: '',
+    social:  {
+        facebook: '',
+        twitter: ''
+    }
 }
 
 const onSubmit = values => {
@@ -39,6 +43,7 @@ const validationSchema = Yup.object(
         channel: Yup.string().required('Required !!!'),
         comments: Yup.string().required('Required !!!'),
         address: Yup.string().required('Required !!!'),
+        social: Yup.string().required('Required !!!')
     }
 )
 
@@ -80,7 +85,7 @@ function YoutubeForm() {
                 </div>
 
                 <div className='form-control'>
-                <label htmlFor='address' >Address</label>
+                <label htmlFor='address' >Address</label> 
                 <Field name='address'>
                     {
                         (props) => {
@@ -95,6 +100,19 @@ function YoutubeForm() {
                     }
                 </Field>
                 </div>
+
+                <div className='form-control'>
+                <label htmlFor='facebook' >Facebook profile</label>
+                <Field  type='text' id='facebook' name='social.facebook' />
+                <ErrorMessage name="facebook" component={TextError}/>
+                </div>
+
+                <div className='form-control'>
+                <label htmlFor='twitter' >Twitter profile</label>
+                <Field  type='text' id='twitter' name='social.twitter' />
+                <ErrorMessage name="twitter" component={TextError}/>
+                </div>
+
 
                 <button type='submit'>Sumbit</button>
             </Form>
