@@ -1,5 +1,5 @@
 import React from 'react'
-import {useFormik,Formik,Form,Field,ErrorMessage,FieldArray} from 'formik'
+import {useFormik,Formik,Form,Field,ErrorMessage,FieldArray, FastField} from 'formik'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup'
@@ -91,9 +91,10 @@ function YoutubeForm() {
 
                 <div className='form-control'>
                 <label htmlFor='address' >Address</label> 
-                <Field name='address'>
+                <FastField name='address'>
                     {
                         (props) => {
+                            console.log('address field render')
                             const {field,form,meta} = props
                             return (
                                 <div  className='error'>
@@ -103,7 +104,7 @@ function YoutubeForm() {
                             )
                         }
                     }
-                </Field>
+                </FastField>
                 </div>
 
                 <div className='form-control'>
