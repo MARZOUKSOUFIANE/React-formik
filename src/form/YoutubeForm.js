@@ -1,5 +1,5 @@
 import React from 'react'
-import {useFormik,Formik,Form,Field,ErrorMessage} from 'formik'
+import {useFormik,Formik,Form,Field,ErrorMessage,FieldArray} from 'formik'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup'
@@ -30,7 +30,8 @@ const initialValues = {
         facebook: '',
         twitter: ''
     },
-    phoneNumbers: ['','']
+    phoneNumbers: ['',''],
+    phNumbers: ['']
 }
 
 const onSubmit = values => {
@@ -127,6 +128,34 @@ function YoutubeForm() {
                 <label htmlFor='phone2' >Secondary phoneNumber</label>
                 <Field  type='text' id='phone2' name='phoneNumbers[1]' />
                 <ErrorMessage name="phoneNumbers[1]" component={TextError}/>
+                </div>
+
+                <div className='form-control'>
+                <label >phNumbers</label>
+                <FieldArray name='phNumbers'>
+                    {
+                        (fieldArrayProps) => {
+                            const {remove,push,form} = fieldArrayProps
+                            const {values} = form
+                            const {phNumbers} = values
+                            return (
+                                <div>
+                                    {
+                                        phNumbers.map((phNumber,index) => (
+                                            <div key={index}>
+                                                <Field name={`phNumbers[${index}]`} />
+                                                <button type='button' onClick={() => push('')}> + </button>
+                                                {
+                                                    index>0 && <button type='button' onClick={() => remove(index)}> - </button>
+                                                } 
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            )
+                        }
+                    }
+                </FieldArray>
                 </div>
 
 
