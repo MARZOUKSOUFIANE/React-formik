@@ -43,7 +43,6 @@ const validationSchema = Yup.object(
         name: Yup.string().required('Required !!!'),
         email: Yup.string().email('Invalid email format !!!').required('Required !!!'),
         channel: Yup.string().required('Required !!!'),
-        comments: Yup.string().required('Required !!!'),
         address: Yup.string().required('Required !!!'),
         social: Yup.object().shape({
             facebook: Yup.string().required('Required !!!'),
@@ -51,6 +50,14 @@ const validationSchema = Yup.object(
         })
     }
 )
+
+const validateComments = value => {
+    let error
+    if(!value){
+        error = "Required field !!!"
+    }
+    return error
+}
 
 
 
@@ -62,8 +69,6 @@ function YoutubeForm() {
     initialValues={initialValues}
     onSubmit={onSubmit}
     validationSchema={validationSchema}
-    validateOnChange={false}
-    validateOnBlur={false}
     >
         <div className={classes.root}>
            <Paper  className={classes.form} elevation={3}>
@@ -88,7 +93,7 @@ function YoutubeForm() {
 
                 <div className='form-control'>
                 <label htmlFor='channel' >Comments</label>
-                <Field  as='textarea' type='text' id='comments' name='comments' />
+                <Field  as='textarea' type='text' id='comments' name='comments' validate={validateComments} />
                 <ErrorMessage name="comments" component={TextError}/>
                 </div>
 
@@ -98,7 +103,6 @@ function YoutubeForm() {
                     {
                         (props) => {
                             const {field,form,meta} = props
-                            console.log('form errors ', form.errors)
                             return (
                                 <div  className='error'>
                                     <input type='text' id='address' {...field}/>
