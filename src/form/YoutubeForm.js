@@ -61,7 +61,10 @@ function YoutubeForm() {
     <Formik
     initialValues={initialValues}
     onSubmit={onSubmit}
-    validationSchema={validationSchema}>
+    validationSchema={validationSchema}
+    validateOnChange={false}
+    validateOnBlur={false}
+    >
         <div className={classes.root}>
            <Paper  className={classes.form} elevation={3}>
            <Form>
@@ -91,11 +94,11 @@ function YoutubeForm() {
 
                 <div className='form-control'>
                 <label htmlFor='address' >Address</label> 
-                <FastField name='address'>
+                <Field name='address'>
                     {
                         (props) => {
-                            console.log('address field render')
                             const {field,form,meta} = props
+                            console.log('form errors ', form.errors)
                             return (
                                 <div  className='error'>
                                     <input type='text' id='address' {...field}/>
@@ -104,7 +107,7 @@ function YoutubeForm() {
                             )
                         }
                     }
-                </FastField>
+                </Field>
                 </div>
 
                 <div className='form-control'>
